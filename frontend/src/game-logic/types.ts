@@ -62,4 +62,33 @@ export interface Unit {
   owner_id: string;
   position: Point;
   max_range: number; // Movement range in base units
+
+  // Combat stats
+  hp: number;
+  max_hp: number;
+  attack: number;
+  defense: number;
+}
+
+export interface UnitTypeDefinition {
+    type: string;
+    move_cost_multiplier: Record<string, number>; // terrain_id -> cost
+    max_range: number;
+    max_hp: number;
+    attack: number;
+    defense: number;
+}
+
+// Intent System
+export interface MoveIntent {
+    unit_id: string;
+    target: Point;
+    path_cost: number; // calculated at submission time
+}
+
+export interface PlayerState {
+    id: string;
+    color: number;
+    ready: boolean;
+    intents: MoveIntent[];
 }
